@@ -28,14 +28,37 @@ public class ProductoServiceImpl  implements ProductoService {
 
 	@Override
 	public void agregarProducto(Producto producto) {
-		 productoRepository.save(producto);
-		
+	    Optional<Producto> productoExistente = productoRepository.findByNombre(producto.getNombre());
+
+	    if (productoExistente.isPresent()) {
+	        throw new RuntimeException("El producto con nombre '" + producto.getNombre() + "' ya existe.");
+	    }
+
+	    productoRepository.save(producto);
 	}
+
 
 	@Override
 	public void eliminarProducto(Long id) {
 		 productoRepository.delete(id);
 		
 	}
+
+	@Override
+	public void editarProducto(Producto producto) {
+		if (productoRepository.findById(producto.getId()).isPresent()) {
+	        productoRepository.save(producto);
+	    } else {
+	        throw new RuntimeException("Producto no encontrado con ID: " + producto.getId());
+	    }
+		
+	}
+
+	@Override
+	public boolean existeProductoPorNombre(String nombre) {
+		return productoRepository.findByNombre(nombre).isPresent();
+	}
+	
+	
 
 }

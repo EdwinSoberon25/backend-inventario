@@ -39,4 +39,19 @@ public class ProductoJpaRepository implements ProductoRepository {
 		
 	}
 
+	@Override
+	public void editarProducto(Producto producto) {
+		 if (repository.existsById(producto.getId())) {
+			 repository.save(producto);
+	        } else {
+	            throw new RuntimeException("Producto no encontrado con ID: " + producto.getId());
+	        }
+		
+	}
+
+	@Override
+	public Optional<Producto> findByNombre(String nombre) {
+		return repository.findByNombre(nombre);
+	}
+
 }

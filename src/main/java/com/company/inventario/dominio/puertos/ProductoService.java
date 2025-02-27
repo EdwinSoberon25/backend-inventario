@@ -10,5 +10,8 @@ public interface ProductoService {
 	List<Producto> obtenerProductos();
     Optional<Producto> obtenerProductoPorId(Long id);
     void agregarProducto(Producto producto);
-    void eliminarProducto(Long id);
+    void eliminarProducto(Long id); 
+    void editarProducto(Producto producto);
+    boolean existeProductoPorNombre(String nombre);
+
 }

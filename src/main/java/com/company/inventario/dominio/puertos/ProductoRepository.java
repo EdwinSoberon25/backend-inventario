@@ -10,5 +10,8 @@ public interface ProductoRepository {
 	    Optional<Producto> findById(Long id);
 	    void save(Producto producto);
 	    void delete(Long id);
+	    void editarProducto(Producto producto);
+	    Optional<Producto> findByNombre(String nombre);
+
 
 }
